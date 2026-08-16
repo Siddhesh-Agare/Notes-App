@@ -1,16 +1,30 @@
-# React + Vite
+# 📝 Notes App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, fast, and responsive dark-themed note-taking web application built with **React** and **Tailwind CSS**. Easily capture, tag, organize, and manage your daily notes with an intuitive split-screen UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- **Modern Dark UI:** Styled with deep slate tones, subtle glassmorphism effects, and glowing indigo accents.
+- **Split-Screen Layout:** Create new notes on the left while viewing your collection side-by-side on the right.
+- **Categorization with Tags:** Tag your notes (e.g., Work, Personal, Ideas) for better visual organization.
+- **Real-Time Note Management:** Add and delete notes instantly with local React state.
+- **Fully Responsive:** Seamless layout transition from desktop split-screen to mobile stacked view.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Framework:** [React](https://react.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons / Theme:** Native CSS & Tailwind Utility Classes
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure you have [Node.js](https://nodejs.org/) installed on your machine.
+
