@@ -21,6 +21,9 @@ A modern, fast, and responsive dark-themed note-taking web application built wit
 - **Icons / Theme:** Native CSS & Tailwind Utility Classes
 
 ---
+## 🚀 UI
+<img width="1327" height="597" alt="image" src="https://github.com/user-attachments/assets/d834fd57-7fe2-4cc6-9236-f620a2e28e17" />
+
 
 ## 🚀 Getting Started
 
