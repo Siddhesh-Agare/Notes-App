@@ -14,6 +14,7 @@ const App = () => {
     setTitle('');
     setDetails('');
     setTag('');
+    
   };
 
   const deleteNote = (idx) => {
