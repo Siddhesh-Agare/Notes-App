@@ -1,27 +1,40 @@
 import React, { useState } from 'react'
 
 const App = () => {
-  const [title, setTitle] = useState('');
-  const [details, setDetails] = useState('');
-  const [tag, setTag] = useState('');
-  const [notes, setNotes] = useState([]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (!title.trim() && !details.trim()) return;
-    
-    setNotes([...notes, { title, details, tag: tag || 'General' }]);
-    setTitle('');
-    setDetails('');
-    setTag('');
-    
-  };
+  const [title, setTitle] = useState();
+  const [details, setDetails] = useState();
+  const [tag, setTag] = useState()
+  const [notes, setNotes] = useState(() => {
+  const savedNotes = localStorage.getItem('notes');
 
-  const deleteNote = (idx) => {
-    const copyNote = [...notes];
-    copyNote.splice(idx, 1);
-    setNotes(copyNote);
-  };
+  return savedNotes ? JSON.parse(savedNotes) : [];
+})
+
+  const submitHandler = (e)=>{
+    e.preventDefault()
+    const newNote = [...notes]
+    newNote.push({title,details,tag})
+    setNotes(newNote);
+    localStorage.setItem('notes', JSON.stringify(newNote));
+    
+
+    setTitle("")
+    setDetails("")
+    setTag("")
+      
+  }
+
+  const deleteNote = (idx)=>{
+    const copyNote = [...notes]
+
+    copyNote.splice(idx,1)
+
+    setNotes(copyNote)
+    localStorage.setItem('notes', JSON.stringify(copyNote));
+
+  }
+
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 p-6 md:p-12 font-sans selection:bg-indigo-500 selection:text-white">
@@ -46,7 +59,9 @@ const App = () => {
                   placeholder="e.g. Q3 Design Roadmap"
                   className="w-full bg-slate-800/60 border border-slate-700/60 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-sm"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e)=>{
+                    setTitle(e.target.value)
+                  }}
                 />
               </div>
 
@@ -55,7 +70,9 @@ const App = () => {
                   type="text" 
                   value={tag} 
                   placeholder="e.g. Work, Personal, Ideas" 
-                  onChange={(e) => setTag(e.target.value)}
+                  onChange={(e)=>{
+                    setTag(e.target.value)
+                  }}
                   className="w-full bg-slate-800/60 border border-slate-700/60 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-sm"
                 />
               </div>
@@ -63,11 +80,14 @@ const App = () => {
               <div>
                 <textarea
                   name="note"
+                  id=""
                   rows={6}
                   placeholder="Jot down details, checklists, links, or key insights..."
                   className="w-full bg-slate-800/60 border border-slate-700/60 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none transition-all text-sm leading-relaxed"
                   value={details}
-                  onChange={(e) => setDetails(e.target.value)}
+                  onChange={(e)=>{
+                    setDetails(e.target.value)
+                  }}
                 ></textarea>
               </div>
 
@@ -86,18 +106,14 @@ const App = () => {
               <span className="text-xs text-slate-500 font-mono">{notes.length} Saved</span>
             </div>
 
-            {notes.length === 0 ? (
-              <div className="text-center py-16 border border-dashed border-slate-800 rounded-2xl bg-slate-900/30 text-slate-500">
-                <p className="text-sm">No notes yet. Fill out the form on the left to add your first note!</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {notes.map((elem, idx) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {notes.map((elem,idx)=>{
+                return (
                   <div key={idx} className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 shadow-lg transition-all duration-300 flex flex-col justify-between">
                     <div className="space-y-2">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="font-semibold text-base text-slate-100 line-clamp-1">
-                          {elem.title || 'Untitled Note'}
+                          {elem.title}
                         </h3>
                         <span className="text-xs text-slate-500 font-mono shrink-0">Aug 16</span>
                       </div>
@@ -106,20 +122,15 @@ const App = () => {
                       </p>
                     </div>
                     <div className="mt-4 pt-3 border-t border-slate-800/60 flex justify-between items-center">
-                      <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                        {elem.tag}
-                      </span>
-                      <button 
-                        onClick={() => deleteNote(idx)} 
-                        className="text-xs text-slate-500 hover:text-red-400 transition-colors"
-                      >
-                        Delete
-                      </button>
+                      <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">{elem.tag}</span>
+                      <button onClick={()=>{
+                        deleteNote(idx)
+                      }} className="text-xs text-slate-500 hover:text-red-400 transition-colors">Delete</button>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
+                )
+              })}
+            </div>
           </div>
                   
         </div>
